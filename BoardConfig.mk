@@ -12,15 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Platform
-TARGET_ARCH := arm
-TARGET_BOARD_PLATFORM := sc8830
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_VARIANT := cortex-a7
-TARGET_NO_BOOTLOADER := true
-BOARD_VENDOR := samsung
+# Device board elements
+include device/samsung/grandneove3g/PlatformConfig.mk
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := GT-I9060I,grandneove3g
@@ -38,6 +31,7 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := sc7730s
+TARGET_NO_BOOTLOADER := true
 
 # Build system
 WITHOUT_CHECK_API := true
@@ -149,6 +143,9 @@ TARGET_LD_SHIM_LIBS += \
 
 # System properties
 TARGET_SYSTEM_PROP += device/samsung/grandneove3g/system.prop
+
+# Vendor platform
+BOARD_VENDOR := samsung
 
 # WiFi
 BOARD_WLAN_DEVICE := bcmdhd
