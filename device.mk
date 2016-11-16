@@ -88,8 +88,14 @@ PRODUCT_PACKAGES += \
 	libgps_shim \
 	libphoneserver_shim
 
-# Dalvik heap config
-$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
+# Dalvik properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapstartsize=8m \
+    dalvik.vm.heapgrowthlimit=192m \
+    dalvik.vm.heapsize=256m \
+    dalvik.vm.heaptargetutilization=0.75 \
+    dalvik.vm.heapminfree=512k \
+    dalvik.vm.heapmaxfree=8m
 
 # Disable mobile data on first boot
 PRODUCT_PROPERTY_OVERRIDES += \
