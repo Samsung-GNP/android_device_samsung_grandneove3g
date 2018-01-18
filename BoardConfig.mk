@@ -67,6 +67,9 @@ PRODUCT_DEX_PREOPT_BOOT_FLAGS += --compiler-filter=speed
 PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed
 WITH_DEX_PREOPT_GENERATE_PROFILE := false
 
+# Exclude serif fonts for saving system.img size.
+EXCLUDE_SERIF_FONTS := true
+
 # GPS
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/grandneove3g/include
 
