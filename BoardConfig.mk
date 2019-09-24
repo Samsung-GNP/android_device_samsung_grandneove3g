@@ -13,10 +13,10 @@
 # limitations under the License.
 
 # Inherit from scx30g common configs
--include device/samsung/scx30g-common/BoardConfigCommon.mk
+include device/samsung/scx30g-common/BoardConfigCommon.mk
 
 # Inherit from the proprietary version
--include vendor/samsung/core33g/BoardConfigVendor.mk
+include vendor/samsung/grandneove3g/BoardConfigVendor.mk
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := sc7730s
@@ -82,15 +82,15 @@ TARGET_BOARD_BACK_CAMERA_MIPI := phyab
 ##########################################
 
 # Kernel
-TARGET_KERNEL_CONFIG := cyanogen_core33g_defconfig
-TARGET_KERNEL_SOURCE := kernel/samsung/core33g
+TARGET_KERNEL_CONFIG := grandneove3g_defconfig
+TARGET_KERNEL_SOURCE := kernel/samsung/grandneove3g
 
 # Resolution
 TARGET_SCREEN_HEIGHT := 800
 TARGET_SCREEN_WIDTH := 480
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := SM-G360H,SM-G360HU,core33g,core33gdd,core33gdx
+TARGET_OTA_ASSERT_DEVICE := GT-I9060I,grandneove3g
 
 # Graphics
 #TARGET_USES_GRALLOC1 := true
