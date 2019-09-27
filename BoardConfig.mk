@@ -99,6 +99,9 @@ TARGET_OTA_ASSERT_DEVICE := GT-I9060I,grandneove3g
 # Sensors
 TARGET_USES_SENSORS_WRAPPER := true
 
+# System properties
+TARGET_SYSTEM_PROP += device/samsung/scx30g-common/system.prop
+
 # Camera
 TARGET_LD_SHIM_LIBS += \
 	/system/vendor/lib/hw/camera.sc8830.so|libmemoryheapion.so

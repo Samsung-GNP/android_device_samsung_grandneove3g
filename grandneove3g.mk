@@ -20,9 +20,6 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 # Inherit from vendor tree
 $(call inherit-product, vendor/samsung/grandneove3g/grandneove3g-vendor.mk)
 
-# Inherit from scx30g-common device configuration
-$(call inherit-product, device/samsung/scx30g-common/common.mk)
-
 # Boot animation
 TARGET_SCREEN_HEIGHT := 800
 TARGET_SCREEN_WIDTH := 480
@@ -44,6 +41,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Camera
 PRODUCT_PACKAGES += \
 	camera.sc8830
+
+# Rootdir
+PRODUCT_PACKAGES += \
+        fstab.sc8830
 
 # Sensors
 PRODUCT_PACKAGES += \
