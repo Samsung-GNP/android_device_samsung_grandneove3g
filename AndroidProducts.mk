@@ -18,4 +18,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/grandneove3g.mk
+	$(LOCAL_DIR)/lineage.mk

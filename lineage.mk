@@ -1,23 +1,42 @@
-# Release name
-PRODUCT_RELEASE_NAME := grandneove3g
+#
+# Copyright (C) 2019 The LineageOS Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Inherit some common Lineage stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Inherit device configuration
-$(call inherit-product, $(LOCAL_PATH)/grandneove3g.mk)
+$(call inherit-product, $(LOCAL_PATH)/device.mk)
 
-## Device identifier. This must come after all inclusions
+# Device display
+TARGET_SCREEN_HEIGHT := 800
+TARGET_SCREEN_WIDTH := 480
+
+# Device identifications
 PRODUCT_DEVICE := grandneove3g
 PRODUCT_NAME := lineage_grandneove3g
 PRODUCT_BRAND := samsung
-PRODUCT_MODEL := GT-I9060I
 PRODUCT_MANUFACTURER := samsung
-PRODUCT_CHARACTERISTICS := phone
+PRODUCT_MODEL := GT-I9060I
 
-# Stock build fingerprint
+# Build properties
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_NAME=grandneove3g \
+    PRIVATE_BUILD_DESC="grandneove3gxx-user 4.4.4 KTU84P I9060IXXS0API1 release-keys"
+
+# Build fingerprint
 BUILD_FINGERPRINT := "samsung/grandneove3gxx/grandneove3g:4.4.4/KTU84P/I9060IXXS0API1:user/release-keys"
-PRIVATE_BUILD_DESC := "grandneove3gxx-user 4.4.4 KTU84P I9060IXXS0API1 release-keys"
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.build.fingerprint=$(BUILD_FINGERPRINT)
