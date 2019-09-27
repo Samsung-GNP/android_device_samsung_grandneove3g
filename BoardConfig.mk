@@ -12,14 +12,61 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Inherit from scx30g common configs
-include device/samsung/scx30g-common/BoardConfigCommon.mk
-
 # Inherit from the proprietary version
 include vendor/samsung/grandneove3g/BoardConfigVendor.mk
 
+# Platform
+TARGET_ARCH := arm
+TARGET_BOARD_PLATFORM := sc8830
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_VARIANT := cortex-a7
+TARGET_NO_BOOTLOADER := true
+BOARD_VENDOR := samsung
+
+# Bionic
+TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
+
+# Bluetooth
+USE_BLUETOOTH_BCM4343 := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/grandneove3g/bluetooth
+BOARD_CUSTOM_BT_CONFIG := device/samsung/grandneove3g/bluetooth/libbt_vndcfg.txt
+
+# Board specific features
+#TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := sc7730s
+
+# Build system
+WITHOUT_CHECK_API := true
+
+# Charger
+BOARD_CHARGER_ENABLE_SUSPEND := true
+BOARD_NO_CHARGER_LED := true
+BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
+CHARGING_ENABLED_PATH := /sys/class/power_supply/battery/batt_lp_charging
+BACKLIGHT_PATH := /sys/class/backlight/panel/brightness
+
+# Enable dex-preoptimization to speed up first boot sequence
+WITH_DEXPREOPT := true
+WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
+PRODUCT_DEX_PREOPT_BOOT_FLAGS += --compiler-filter=speed
+PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed
+WITH_DEX_PREOPT_GENERATE_PROFILE := false
+
+# Healthd
+BOARD_HAL_STATIC_LIBRARIES := libhealthd.sc8830
+
+# HIDL
+DEVICE_MANIFEST_FILE := device/samsung/grandneove3g/configs/manifest.xml
+
+# Include an expanded selection of fonts
+EXTENDED_FONT_FOOTPRINT := true
+
+# Init
+TARGET_INIT_VENDOR_LIB := libinit_sec
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
@@ -32,8 +79,17 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 
+# PowerHAL
+TARGET_POWERHAL_VARIANT := scx35
+
+# RIL
+TARGET_DISABLE_ASHMEM_TRACKING := true
+
 # Camera HAL1 hack
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+
+# Codecs
+BOARD_CANT_REALLOCATE_OMX_BUFFERS := true
 
 # WiFi
 BOARD_WLAN_DEVICE := bcmdhd
@@ -64,6 +120,9 @@ TARGET_BOARD_CAMERA_FLASH_CTRL := false
 #face detect
 TARGET_BOARD_CAMERA_FACE_DETECT := false
 
+# GPS
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/grandneove3g/include
+
 #sensor interface
 TARGET_BOARD_BACK_CAMERA_INTERFACE := ccir
 TARGET_BOARD_FRONT_CAMERA_INTERFACE := ccir
@@ -82,8 +141,21 @@ TARGET_BOARD_BACK_CAMERA_MIPI := phyab
 ##########################################
 
 # Kernel
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/grandneove3g/mkbootimg.mk
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_TAGS_OFFSET := 0x01d88000
+BOARD_RAMDISK_OFFSET := 0x01000000
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000
+BOARD_KERNEL_SEPARATED_DT := true
+BOARD_KERNEL_IMAGE_NAME := zImage
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin
 TARGET_KERNEL_CONFIG := grandneove3g_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/grandneove3g
+
+# Lights
+TARGET_HAS_BACKLIT_KEYS := false
 
 # Resolution
 TARGET_SCREEN_HEIGHT := 800
@@ -93,15 +165,26 @@ TARGET_SCREEN_WIDTH := 480
 TARGET_OTA_ASSERT_DEVICE := GT-I9060I,grandneove3g
 
 # Graphics
+BOARD_EGL_NEEDS_HANDLE_VALUE := true
+USE_SPRD_DITHER := true
+USE_SPRD_HWCOMPOSER := true
+TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 #TARGET_USES_GRALLOC1 := true
 #TARGET_UPDATED_MALI := true
+
+# Seccomp
+#BOARD_SECCOMP_POLICY := device/samsung/grandneove3g/seccomp # This flag is dead?
 
 # Sensors
 TARGET_USES_SENSORS_WRAPPER := true
 
+# SELinux policy
+#BOARD_SEPOLICY_DIRS += device/samsung/grandneove3g/sepolicy
+
 # System properties
-TARGET_SYSTEM_PROP += device/samsung/scx30g-common/system.prop
+TARGET_SYSTEM_PROP += device/samsung/grandneove3g/system.prop
 
 # Camera
 TARGET_LD_SHIM_LIBS += \
-	/system/vendor/lib/hw/camera.sc8830.so|libmemoryheapion.so
+	/system/vendor/lib/hw/camera.sc8830.so|libmemoryheapion.so \
+	/system/vendor/bin/gpsd|libgps_shim.so
