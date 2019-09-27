@@ -125,6 +125,9 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 # PowerHAL
 TARGET_POWERHAL_VARIANT := scx35
 
+# Recovery
+TARGET_RECOVERY_FSTAB := device/samsung/grandneove3g/rootdir/fstab.sc8830
+
 # RIL
 BOARD_PROVIDES_LIBRIL := true
 BOARD__CLASS := ../../../device/samsung/grandneove3g/
